@@ -1,13 +1,13 @@
-# Opening and Closing Operations Using OpenCV
+# Implementation of Erosion and Dilation Using OpenCV
 
 ## Aim
 
-To write a Python program using OpenCV to perform morphological Opening and Closing operations on an image.
+To write a Python program using OpenCV to perform morphological operations such as Erosion and Dilation on an image.
 
 The program performs the following operations:
 
-- Morphological Opening
-- Morphological Closing
+- Image Erosion
+- Image Dilation
 
 ## Software Used
 
@@ -25,93 +25,83 @@ Import the required libraries: OpenCV, NumPy, and Matplotlib.
 
 ### Step 2:
 
-Create or load an input image containing foreground objects.
+Create a blank image using NumPy.
 
 ### Step 3:
 
-Display the original image.
+Insert text onto the image using OpenCV's text drawing function.
 
 ### Step 4:
 
+Display the original image.
+
+### Step 5:
+
 Create a structuring element (kernel) of suitable size.
 
-### Step 5: Opening Operation
+### Step 6: Image Erosion
 
-- Apply the Opening operation using the structuring element.
-- Opening consists of Erosion followed by Dilation.
-- Remove small foreground noises while preserving the shape of larger objects.
-- Display the opened image.
+- Apply the erosion operation using the created kernel.
+- Remove pixels from the boundaries of foreground objects.
+- Display the eroded image.
 
-### Step 6: Closing Operation
+### Step 7: Image Dilation
 
-- Apply the Closing operation using the structuring element.
-- Closing consists of Dilation followed by Erosion.
-- Fill small holes and gaps within foreground objects.
-- Display the closed image.
+- Apply the dilation operation using the same kernel.
+- Add pixels to the boundaries of foreground objects.
+- Display the dilated image.
 
-### Step 7:
+### Step 8:
 
-Compare the original, opened, and closed images.
+Compare the original, eroded, and dilated images.
 
 ## Program
 
 ## Developed By
 
-**Name:** ____________________________
+**Name:** SHAGILAN U
 
-**Register No:** ______________________
+**Register No:** 212224040303
 
 ## Output
 
 ### Original Image
+```
+import cv2
+import matplotlib.pyplot as plt
+img = cv2.imread("image.png")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("Original Image")
+plt.axis("off")
+plt.show()
 
-- The input image is displayed.
-- The image serves as the source for morphological processing.
+```
+<img width="647" height="461" alt="image" src="https://github.com/user-attachments/assets/45bcafe2-51ca-48e8-9054-d0164e388004" />
 
-### Opening Operation
 
-- Original image is displayed.
-- Opened image is displayed.
-- Small foreground noise is removed.
-- Thin protrusions and isolated pixels are eliminated.
-- Object boundaries become smoother.
+### Erosion
+```
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+erosion = cv2.erode(img, kernel, iterations=1)
+plt.imshow(erosion, cmap="gray")
+plt.title("Image Erosion")
+plt.axis("off")
+plt.show()
+```
+<img width="647" height="438" alt="image" src="https://github.com/user-attachments/assets/1536a21d-a3e1-4662-b7b0-42c4c7fa60e9" />
 
-### Closing Operation
 
-- Original image is displayed.
-- Closed image is displayed.
-- Small holes and gaps inside objects are filled.
-- Broken regions are connected.
-- Object boundaries become more continuous.
-
-## Applications
-
-### Opening
-
-- Noise removal in binary images.
-- Separation of connected objects.
-- Preprocessing for object detection.
-
-### Closing
-
-- Filling small holes in objects.
-- Connecting nearby components.
-- Enhancing segmented regions.
-
-## Advantages
-
-### Opening
-
-- Removes unwanted foreground noise.
-- Preserves major object structures.
-- Improves segmentation quality.
-
-### Closing
-
-- Restores object continuity.
-- Eliminates small background gaps.
-- Improves object representation.
+### Dilation
+```
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+dilation = cv2.dilate(img, kernel, iterations=1)
+plt.imshow(dilation, cmap="gray")
+plt.title("Image Dilation")
+plt.axis("off")
+plt.show()
+```
+<img width="637" height="437" alt="image" src="https://github.com/user-attachments/assets/4ebaa2d3-e6e5-46f7-be09-551b7389b06f" />
 
 ## Result
 
-Thus, the morphological operations **Opening** and **Closing** are successfully implemented using OpenCV. 
+Thus, the morphological operations **Erosion** and **Dilation** are successfully implemented using OpenCV.
